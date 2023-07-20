@@ -1,7 +1,7 @@
 # To-do-List
 <a name="readme-top"></a>
 <div align="center">
-  <img src="to-doLogo.png" alt="logo" width="140"  height="auto" />
+  <img src="./src/images/to-doLogo.png" alt="logo" width="140"  height="auto" />
   <br/>
 
   <h3><b>To-do List Project</b></h3>
