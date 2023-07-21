@@ -1,34 +1,53 @@
 import './index.scss';
 
-const tasks = [
-  {
-    description: 'Evening Tasks',
-    completed: false,
-    index: 2,
-  },
-  {
-    description: 'Afternoon Tasks',
-    completed: false,
-    index: 1,
-  },
-  {
-    description: 'Morning Tasks',
-    completed: false,
-    index: 0,
-  },
-];
+import viewTasks from './modules/ViewTask.js';
+import addNewTask from './modules/AddNewTask.js';
+import removeTask from './modules/RemoveTask.js';
+import editTask from './modules/EditTask.js';
 
-const viewTasks = () => {
-  const container = document.querySelector('.to-do-list');
-
-  // Sort tasks array based on index property
-  tasks.sort((a, b) => a.index - b.index);
-
-  tasks.forEach((task) => {
-    const listItem = document.createElement('li');
-    listItem.className = 'list-item';
-    listItem.innerHTML = `<input class="check-box" type="checkbox">${task.description}`;
-    container.appendChild(listItem);
+const tasks = JSON.parse(localStorage.getItem('toDoList')) || [];
+window.addEventListener('load', viewTasks(tasks));
+const input = document.querySelector('.input');
+input.addEventListener('keypress', (event) => {
+  if (event.key === 'Enter' && input.value !== '') {
+    const description = input.value;
+    tasks.push(addNewTask(description, tasks.length));
+    viewTasks(tasks);
+    input.value = '';
+  }
+});
+document.addEventListener('click', (event) => {
+  // Remove case functionality
+  const deleteIcons = document.querySelectorAll('.delete-img');
+  deleteIcons.forEach((icon, index) => {
+    if (event.target === icon) {
+      removeTask(tasks, index);
+      viewTasks(tasks);
+    }
   });
-};
-window.addEventListener('load', viewTasks);
+
+  // Edit case functionality
+  const descriptions = document.querySelectorAll('.description');
+  descriptions.forEach((task, index) => {
+    if (event.target === task) {
+      const parentList = event.target.parentNode;
+      parentList.classList.add('edit-bg');
+      const oldTask = tasks[index].description;
+      const inputField = document.createElement('input');
+      inputField.type = 'text';
+      inputField.className = 'description edit-bg';
+      inputField.value = oldTask;
+      task.innerHTML = '';
+      task.appendChild(inputField);
+      inputField.focus();
+
+      inputField.addEventListener('blur', () => {
+        const newTask = inputField.value;
+        task.removeChild(inputField);
+        task.innerText = newTask;
+        editTask(tasks, index, newTask);
+        viewTasks(tasks);
+      });
+    }
+  });
+});

@@ -1,4 +1,4 @@
-$primary-color: #f6f6f6;
+$primary-color: #ebe7e7;
 
 body {
   background-color: $primary-color;
@@ -28,19 +28,57 @@ li {
   .to-do-list {
     .input {
       border: 0;
+      margin: 0;
+      padding: 1rem;
+      width: 100%;
+      font-size: 1.5rem;
 
       &::placeholder {
         font-style: italic;
       }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    #to-do-title {
+      padding: 1.5rem 1rem;
+      font-size: 2rem;
+    }
+
+    .edit-bg {
+      background-color: gray;
     }
 
     .list-item {
       border-bottom: 1px solid #c8c8c8;
-      padding: 1rem 1rem;
-    }
+      padding: 0 1rem;
+      display: flex;
+      align-items: center;
 
-    .check-box {
-      margin-right: 1rem;
+      .check-box {
+        margin-right: 1rem;
+      }
+
+      .delete-icon {
+        justify-self: flex-end;
+
+        img {
+          width: 1.5rem;
+          cursor: pointer;
+        }
+      }
+
+      .description {
+        width: 100%;
+        font-size: 1.5rem;
+        border: 0;
+
+        &:focus {
+          outline: none;
+        }
+      }
     }
   }
 
@@ -52,5 +90,6 @@ li {
     text-decoration: none;
     color: #b7b7b7;
     text-align: center;
+    cursor: pointer;
   }
 }
