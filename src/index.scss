@@ -84,11 +84,11 @@ li {
 
   .clear {
     display: block;
-    background-color: $primary-color;
+    background-color: #3b3838;
     width: 100%;
     padding: 1rem 0;
     text-decoration: none;
-    color: #b7b7b7;
+    color: $primary-color;
     text-align: center;
     cursor: pointer;
   }

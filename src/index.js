@@ -4,8 +4,10 @@ import viewTasks from './modules/ViewTask.js';
 import addNewTask from './modules/AddNewTask.js';
 import removeTask from './modules/RemoveTask.js';
 import editTask from './modules/EditTask.js';
+import taskStatusUpdate from './modules/TaskStatusUpdate.js';
+import clearCompletedTasks from './modules/ClearCompletedTasks.js';
 
-const tasks = JSON.parse(localStorage.getItem('toDoList')) || [];
+let tasks = JSON.parse(localStorage.getItem('toDoList')) || [];
 window.addEventListener('load', viewTasks(tasks));
 const input = document.querySelector('.input');
 input.addEventListener('keypress', (event) => {
@@ -16,8 +18,9 @@ input.addEventListener('keypress', (event) => {
     input.value = '';
   }
 });
+
 document.addEventListener('click', (event) => {
-  // Remove case functionality
+  // Remove task functionality
   const deleteIcons = document.querySelectorAll('.delete-img');
   deleteIcons.forEach((icon, index) => {
     if (event.target === icon) {
@@ -26,12 +29,12 @@ document.addEventListener('click', (event) => {
     }
   });
 
-  // Edit case functionality
+  // Edit task functionality
   const descriptions = document.querySelectorAll('.description');
   descriptions.forEach((task, index) => {
     if (event.target === task) {
-      const parentList = event.target.parentNode;
-      parentList.classList.add('edit-bg');
+      const parentLi = event.target.parentNode;
+      parentLi.classList.add('edit-bg');
       const oldTask = tasks[index].description;
       const inputField = document.createElement('input');
       inputField.type = 'text';
@@ -50,4 +53,20 @@ document.addEventListener('click', (event) => {
       });
     }
   });
+
+  // Checkbox status functionality
+  const checkBoxes = document.querySelectorAll('.check-box');
+  checkBoxes.forEach((checkBox, index) => {
+    checkBox.addEventListener('change', () => {
+      taskStatusUpdate(tasks, index);
+      viewTasks(tasks);
+    });
+  });
+
+  // Clear completed tasks functionality
+  const clearBtn = document.querySelector('.clear');
+  if (event.target === clearBtn) {
+    tasks = clearCompletedTasks(tasks);
+    viewTasks(tasks);
+  }
 });
