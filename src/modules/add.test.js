@@ -1,8 +1,6 @@
 /** @jest-environment jsdom */
 
-// import { addTask, removeTask } from "./AddTest.js";
-import addTask from './modules/AddNewTask.js';
-import removeTask from './modules/RemoveTask.js';
+import {addTask , removeTask} from "./AddTest";
 
 // const addTask = require('./AddTest.js');
 // const removeTask = require('./AddTest.js');
@@ -33,13 +31,20 @@ describe('Adding or removing items test', () => {
   });
 
   test('Removing one item from the list', () => {
-    // const list = document.querySelectorAll('.list-item');
-    // tasks.push(addTask('Testing', tasks.length));
-
     removeTask(tasks, 0);
 
-    console.log(tasks);
+    tasks.forEach((task) => {
+      listItem.innerHTML = `
+        <input class="check-box" type="checkbox" ${task.completed ? 'checked' : 'unchecked'}>
+        <p class="description">${task.description}</p>
+        `;
+      container.appendChild(listItem);
+    });
+    
+    const list = document.querySelectorAll('.list-item');
+    
+    console.log(list)
 
-    // expect(tasks.length).toHaveLength(0);
+    expect(list).toHaveLength(0);
   });
 });

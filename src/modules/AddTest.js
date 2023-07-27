@@ -1,4 +1,4 @@
-const addTask = (taskDescription, arrayLength) => {
+export const addTask = (taskDescription, arrayLength) => {
   const newTask = {
     description: taskDescription,
     completed: false,
@@ -8,7 +8,7 @@ const addTask = (taskDescription, arrayLength) => {
   return newTask;
 };
 
-const removeTask = (tasks, index) => {
+export const removeTask = (tasks, index) => {
   tasks.splice(index, 1);
   let i = index;
   while (i < tasks.length) {
@@ -16,6 +16,3 @@ const removeTask = (tasks, index) => {
     i += 1;
   }
 };
-
-// eslint-disable-next-line no-unused-expressions, no-sequences
-module.exports = addTask, removeTask;
