@@ -16,3 +16,5 @@ export const removeTask = (tasks, index) => {
       i += 1;
     }
   };
+
+// export {addTask , removeTask}
