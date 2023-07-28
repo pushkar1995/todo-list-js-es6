@@ -1,6 +1,8 @@
 /** @jest-environment jsdom */
 
-import { editTask, taskStatusUpdate, clearCompleted } from './EditTest.js';
+import editTask from './EditTask.js';
+import taskStatusUpdate from './TaskStatusUpdate.js';
+import clearCompletedTasks from './ClearCompletedTasks.js';
 
 describe('Testing editing and updating', () => {
   let tasks;
@@ -29,7 +31,7 @@ describe('Testing editing and updating', () => {
       { description: 'Another Test', completed: true, index: 3 },
     );
     taskStatusUpdate(tasks, 0);
-    tasks = clearCompleted(tasks);
+    tasks = clearCompletedTasks(tasks);
     expect(tasks).toEqual([{ description: 'Testing', completed: false, index: 0 }]);
   });
 });
