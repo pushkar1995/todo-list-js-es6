@@ -24,7 +24,6 @@ describe('Adding or removing items test', () => {
 
   test('Removing one item from the list', () => {
     tasks.push(addTask('Testing', tasks.length));
-
     tasks.push(addTask('Testing', tasks.length));
     removeTask(tasks, 0);
 
