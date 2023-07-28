@@ -1,6 +1,6 @@
 /** @jest-environment jsdom */
 
-import {addTask , removeTask, viewTask} from "./AddTest";
+import {addTask , removeTask, viewTask} from "./AddTest.js";
 
 describe('Adding or removing items test', () => {
   let tasks;
@@ -24,6 +24,7 @@ describe('Adding or removing items test', () => {
 
   test('Removing one item from the list', () => {
     tasks.push(addTask('Testing', tasks.length));
+
     tasks.push(addTask('Testing', tasks.length));
     removeTask(tasks, 0);
 
