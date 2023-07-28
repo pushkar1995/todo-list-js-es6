@@ -25,8 +25,8 @@ describe('Testing editing and updating', () => {
 
   test('Clear all completed tasks from the list', () => {
     tasks.push(
-      { description: 'Testing', completed: false, index: 2 }, 
-      { description: 'Another Test', completed: true, index: 3 }
+      { description: 'Testing', completed: false, index: 2 },
+      { description: 'Another Test', completed: true, index: 3 },
     );
     taskStatusUpdate(tasks, 0);
     tasks = clearCompleted(tasks);
