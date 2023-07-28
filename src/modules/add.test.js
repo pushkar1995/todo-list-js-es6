@@ -1,14 +1,14 @@
 /** @jest-environment jsdom */
 
-import {addTask , removeTask, viewTask} from "./AddTest.js";
+import { addTask, removeTask, viewTask } from './AddTest.js';
 
 describe('Adding or removing items test', () => {
   let tasks;
 
-  beforeEach (() => {
+  beforeEach(() => {
     tasks = [];
     document.body.innerHTML += '<ul class="to-do-list"> </ul>';
-  })
+  });
 
   test('Adding one item to the list', () => {
     tasks.push(addTask('Testing', tasks.length));
