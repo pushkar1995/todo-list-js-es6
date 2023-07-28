@@ -7,9 +7,9 @@ describe('Testing editing and updating', () => {
 
   beforeEach(() => {
     tasks = [{
-      index: 1,
       description: 'This is the test task',
       completed: false,
+      index: 1,
     }];
   });
 
@@ -24,9 +24,12 @@ describe('Testing editing and updating', () => {
   });
 
   test('Clear all completed tasks from the list', () => {
-    tasks = tasks.push({});
+    tasks.push(
+      { description: 'Testing', completed: false, index: 2 }, 
+      { description: 'Another Test', completed: true, index: 3 }
+    );
     taskStatusUpdate(tasks, 0);
-    clearCompleted(tasks);
-    console.log(tasks);
+    tasks = clearCompleted(tasks);
+    expect(tasks).toEqual([{ description: 'Testing', completed: false, index: 0 }]);
   });
 });
